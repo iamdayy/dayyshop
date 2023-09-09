@@ -6,101 +6,12 @@ const props = defineProps({
 });
 </script>
 <template>
-  <nav class="md:p-5 p-2 absolute w-full z-50">
+  <nav class="md:p-4 p-2 absolute w-full z-50">
     <div
-      class="max-w-screen-xl flex flex-wrap items-center justify-between md:p-4 p-2 bg-gray-700 border-gray-100 border backdrop-blur-xl bg-opacity-40 shadow-lg dark:bg-gray-900 md:rounded-full rounded-lg"
+      class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between md:p-4 md:px-12 p-2 bg-gray-700 border-gray-100 border backdrop-blur-xl bg-opacity-40 shadow-lg dark:bg-gray-900 md:rounded-full rounded-lg"
     >
-      <a href="https://flowbite.com/" class="flex items-center">
-        <img
-          src="https://flowbite.com/docs/images/logo.svg"
-          class="h-8 mr-3"
-          alt="Flowbite Logo"
-        />
-        <span
-          class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-          >Flowbite</span
-        >
-      </a>
-      <div class="flex md:order-2">
-        <button
-          type="button"
-          data-collapse-toggle="navbar-search"
-          aria-controls="navbar-search"
-          aria-expanded="false"
-          class="md:hidden text-gray-500 dark:text-gray-400 hover:ring-1 hover:ring-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-200 dark:focus:bg-gray-700 rounded-lg text-sm p-2.5 mr-1"
-        >
-          <svg
-            class="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-          <span class="sr-only">Search</span>
-        </button>
-        <div class="relative hidden md:block">
-          <div
-            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-          >
-            <svg
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-            <span class="sr-only">Search icon</span>
-          </div>
-          <input
-            type="text"
-            id="search-navbar"
-            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search..."
-          />
-        </div>
-        <button
-          data-collapse-toggle="navbar-search"
-          type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:ring-1 hover:ring-gray-100 focus:outline-none focus:bg-gray-200 dark:text-gray-400 dark:hover:ring-gray-700 dark:focus:bg-gray-600"
-          aria-controls="navbar-search"
-          aria-expanded="false"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg
-            class="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
-        </button>
-      </div>
       <div
-        class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+        class="items-center justify-between hidden w-full md:flex md:w-auto order-1 md:order-none"
         id="navbar-search"
       >
         <div class="relative mt-3 md:hidden">
@@ -136,13 +47,102 @@ const props = defineProps({
           <li v-for="item, i in props.routes" :key="i">
             <router-link :to="{ name: item.name }">
                 <a
-                class="block py-2 pl-3 pr-4 bg-green-400 md:bg-transparent border-green-400 hover:border-b md:p-0 md:dark:bg-green-400"
+                class="block py-2 pl-3 pr-4 md:bg-transparent border-green-400 hover:border-b md:p-0"
                 :class="$route.name == item.name ? 'text-green-400 border-b' : 'text-white border-0'"
                 >{{ item.title }}</a
                 >
             </router-link>
           </li>
         </ul>
+      </div>
+      <a href="https://flowbite.com/" class="flex items-center">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          class="h-8 mr-3"
+          alt="Flowbite Logo"
+        />
+        <span
+          class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+          >Dayyshop</span
+        >
+      </a>
+      <div class="flex md:order-2">
+        <button
+          type="button"
+          data-collapse-toggle="navbar-search"
+          aria-controls="navbar-search"
+          aria-expanded="false"
+          class="md:hidden text-gray-200 dark:text-gray-100 hover:ring-1 hover:ring-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 mr-1"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+          <span class="sr-only">Search</span>
+        </button>
+        <div class="relative hidden md:block">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-200 dark:text-gray-100"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+            <span class="sr-only">Search icon</span>
+          </div>
+          <input
+            type="text"
+            id="search-navbar"
+            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search..."
+          />
+        </div>
+        <button
+          data-collapse-toggle="navbar-search"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-200 rounded-lg md:hidden hover:ring-1 hover:ring-gray-100 focus:outline-none dark:text-gray-100 dark:hover:ring-gray-700"
+          aria-controls="navbar-search"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>

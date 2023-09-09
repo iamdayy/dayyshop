@@ -15,6 +15,11 @@ const routes = ref<Route[]>([
         name: "Products",
         title: "Product",
     },
+    {
+        path: "/blogs",
+        name: "Blogs",
+        title: "Blog"
+    }
 ])
 </script>
 <template>
