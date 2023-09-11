@@ -1,113 +1,110 @@
 <template>
-    <div class="py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:mx-0">
-          <h2 class="text-3xl font-bold tracking-tight  sm:text-4xl">From the blog</h2>
-          <p class="mt-2 text-lg leading-8 ">Learn how to grow your business with our expert advice.</p>
-        </div>
-        <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          <article v-for="post in posts" :key="post.id" class="flex max-w-xl flex-col items-start justify-between">
-            <div class="flex items-center gap-x-4 text-xs">
-              <time :datetime="post.datetime" class="">{{ post.date }}</time>
-              <a :href="post.category.href" class="relative z-10 rounded-full px-3 py-1.5 font-medium  hover:bg-gray-100">{{ post.category.title }}</a>
-            </div>
-            <div class="group relative">
-              <h3 class="mt-3 text-lg font-semibold leading-6  group-hover:text-gray-600">
-                <a :href="post.href">
-                  <span class="absolute inset-0" />
-                  {{ post.title }}
-                </a>
-              </h3>
-              <p class="mt-5 line-clamp-3 text-sm leading-6">{{ post.description }}</p>
-            </div>
-            <div class="relative mt-8 flex items-center gap-x-4">
-              <img :src="post.author.imageUrl" alt="" class="h-10 w-10 rounded-full" />
-              <div class="text-sm leading-6">
-                <p class="font-semibold ">
-                  <a :href="post.author.href">
-                    <span class="absolute inset-0" />
-                    {{ post.author.name }}
-                  </a>
-                </p>
-                <p class="">{{ post.author.role }}</p>
+  <div class="py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto lg:mx-0">
+        <div class="flex w-full justify-between">
+          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+            From the blog
+          </h2>
+          <div>
+            <button
+              type="button"
+              class="-m-2 ml-5 p-2 text-gray-100 hover:text-gray-300 sm:ml-7"
+            >
+              <span class="sr-only">View grid</span>
+              <ViewGridIcon
+                class="h-5 w-5"
+                aria-hidden="true"
+                @click="isGrid = !isGrid"
+              />
+            </button>
+            <Menu as="div" class="relative inline-block text-left">
+              <div>
+                <MenuButton
+                  class="group inline-flex justify-center text-sm font-medium text-gray-300 hover:text-gray-100 ml-4"
+                >
+                  <FilterIcon class="h-5 w-5" aria-hidden="true"></FilterIcon>
+                  <ChevronDownIcon
+                    class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-100 group-hover:text-gray-300"
+                    aria-hidden="true"
+                  />
+                </MenuButton>
               </div>
-            </div>
-          </article>
+
+              <transition
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
+              >
+                <MenuItems
+                  class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white dark:bg-gray-600 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
+                  <div class="py-1">
+                    <MenuItem
+                      v-for="option in sortOptions"
+                      :key="option.name"
+                      v-slot="{ active }"
+                    >
+                      <a
+                        :href="option.href"
+                        :class="[
+                          option.current
+                            ? 'font-medium text-gray-800 dark:text-gray-100'
+                            : 'text-gray-800 dark:text-gray-300',
+                          active ? 'bg-gray-100 dark:bg-gray-700' : '',
+                          'block px-4 py-2 text-sm bg-gray-300 dark:bg-gray-800',
+                        ]"
+                        >{{ option.name }}</a
+                      >
+                    </MenuItem>
+                  </div>
+                </MenuItems>
+              </transition>
+            </Menu>
+          </div>
         </div>
+
+        <p class="mt-2 text-lg leading-8">
+          Learn how to grow your business with our expert advice.
+        </p>
+      </div>
+      <div
+        :class="`mx-auto mt-4 grid w-full grid-cols-1 gap-x-6 gap-y-8 border-t border-gray-200 pt-4 lg:mx-0 ${
+          isGrid ? 'lg:max-w-none lg:grid-cols-3' : ''
+        }`"
+      >
+        <BlogCard
+          v-for="post in posts"
+          :key="post.id"
+          :post="post"
+          :is-grid="false"
+        >
+        </BlogCard>
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  const posts = [
-    {
-      id: 1,
-      title: 'Boost your conversion rate',
-      href: '#',
-      description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
-      category: { title: 'Marketing', href: '#' },
-      author: {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        href: '#',
-        imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    },
-    {
-      id: 2,
-      title: 'Boost your conversion rate',
-      href: '#',
-      description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
-      category: { title: 'Marketing', href: '#' },
-      author: {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        href: '#',
-        imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    },
-    {
-      id: 3,
-      title: 'Boost your conversion rate',
-      href: '#',
-      description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
-      category: { title: 'Marketing', href: '#' },
-      author: {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        href: '#',
-        imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    },
-    {
-      id: 4,
-      title: 'Boost your conversion rate',
-      href: '#',
-      description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
-      category: { title: 'Marketing', href: '#' },
-      author: {
-        name: 'Michael Foster',
-        role: 'Co-Founder / CTO',
-        href: '#',
-        imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      },
-    },
-    // More posts...
-  ]
-  </script>
+  </div>
+</template>
+
+<script setup lang="ts">
+import BlogCard from "../components/BlogCard.vue";
+import posts from "../assets/blogs";
+import { ref } from "vue";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import {
+  FilterIcon,
+  ViewGridIcon,
+  ChevronDownIcon,
+} from "@heroicons/vue/outline";
+const isGrid = ref<boolean>(true);
+
+const sortOptions = [
+  { name: "Most Popular", href: "#", current: true },
+  { name: "Best Rating", href: "#", current: false },
+  { name: "Newest", href: "#", current: false },
+  { name: "Price: Low to High", href: "#", current: false },
+  { name: "Price: High to Low", href: "#", current: false },
+];
+</script>

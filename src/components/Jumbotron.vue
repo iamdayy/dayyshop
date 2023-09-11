@@ -2,16 +2,15 @@
 defineProps({
   image: String,
   title: String,
-  text: String
+  text: String,
 });
-
 </script>
 <template>
   <div class="h-3/5 bg-bottom" :style="`background-image: url(${image})`">
     <div
       :class="`absolute flex sm:flex-row flex-col h-full bg-gradient-to-b from-[#43baff57] from-60% to-60%`"
     >
-      <div class="px-4 mx-auto  text-center py-12 pt-28 lg:py-36">
+      <div class="px-4 mx-auto text-center py-12 pt-28 lg:py-36">
         <h1
           class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl"
         >
@@ -19,7 +18,9 @@ defineProps({
         </h1>
         <p
           class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"
-        >{{ text }}</p>
+        >
+          {{ text }}
+        </p>
         <div
           class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4"
         >
@@ -52,14 +53,12 @@ defineProps({
           </a>
         </div>
       </div>
-      <div class="w-full md:w-1/3 p-6 md:self-end translate-x-0 md:-translate-x-36">
+      <div
+        class="w-full md:w-1/3 p-6 md:self-end translate-x-0 md:-translate-x-36"
+      >
         <img :src="image" class="mx-auto shadow-lg shadow-black" :alt="title" />
       </div>
     </div>
   </div>
 </template>
-<style scoped>
-
-
-
-</style>
+<style scoped></style>
