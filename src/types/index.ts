@@ -18,7 +18,7 @@ export interface Product {
   category: Category;
   id: number;
   color: string;
-  price: string;
+  price: number;
 }
 
 export interface Category {

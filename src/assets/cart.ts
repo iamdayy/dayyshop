@@ -1,6 +1,6 @@
-import { Product } from "../types";
+import { Cart } from "../types";
 
-const products: Product[] = [
+const carts: Cart[] = [
   {
     id: 1,
     name: "Basic Tee",
@@ -14,6 +14,7 @@ const products: Product[] = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: 35000,
     color: "Black",
+    quantity: 3
   },
   {
     id: 2,
@@ -28,7 +29,8 @@ const products: Product[] = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: 35000,
     color: "Black",
+    quantity: 1
   },
 ];
 
-export default products;
+export default carts;

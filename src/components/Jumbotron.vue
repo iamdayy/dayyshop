@@ -56,7 +56,7 @@ defineProps({
       <div
         class="w-full md:w-1/3 p-6 md:self-end translate-x-0 md:-translate-x-36"
       >
-        <img :src="image" class="mx-auto shadow-lg shadow-black" :alt="title" />
+        <img :src="image" class="mx-auto shadow-lg shadow-black " :alt="title" />
       </div>
     </div>
   </div>

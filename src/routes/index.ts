@@ -3,7 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 import HomeView from "../views/Home.vue";
 import ProductsView from "../views/Products.vue";
 import BlogsView from "../views/Blogs.vue";
-
+import OrderView from "../views/order.vue"
 const routes: RouteRecordRaw[] = [
   {
     path: "",
@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: "/order",
+    name: "Order",
+    component: OrderView,
+  }
 ];
 
 export default createRouter({

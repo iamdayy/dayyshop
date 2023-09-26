@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 import { Product } from "../types";
+import { ShoppingCartIcon } from "@heroicons/vue/outline";
 import useCartStore from "../stores/cart";
 
+const RpCurr = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    })
 const { addToCart } = useCartStore();
-
+const added = ref<boolean>(false);
+const add = (product: Product) => {
+  addToCart(product);
+  added.value = true;
+}
 defineProps({
   isGrid: Boolean,
   product: {
@@ -14,19 +23,19 @@ defineProps({
 });
 </script>
 <template>
-  <div :class="`group relative ${!isGrid ? 'flex space-x-12' : ''}`">
+  <div :class="`group relative bg-slate-400 bg-opacity-20 backdrop-blur-sm border border-gray-100 rounded-2xl overflow-hidden ${!isGrid ? 'flex space-x-12' : ''}`">
     <div
-      :class="`aspect-h-1 aspect-w-1 ${
+      :class="`aspect-square aspect-w-1 ${
         isGrid ? 'w-full' : 'w-1/6'
-      } overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75`"
+      } overflow-hidden bg-gray-200 group-hover:opacity-75 align-middle`"
     >
       <img
         :src="product.imageSrc"
         :alt="product.imageAlt"
-        class="h-full w-full object-cover object-center"
+        class="object-cover"
       />
     </div>
-    <div class="mt-4 flex justify-between w-full">
+    <div class="mt-4 flex justify-between w-full p-2">
       <div class="whitespace-nowrap overflow-hidden">
         <h3 class="text-sm text-ellipsis overflow-hidden">
           <a :href="product.href">
@@ -38,27 +47,34 @@ defineProps({
         </h3>
         <p class="mt-1 text-sm">{{ product.color }}</p>
       </div>
-      <div>
-        <p class="text-sm font-medium">{{ product.price }}</p>
+      <div class="flex flex-col items-end gap-1">
+        <p class="text-sm font-medium">{{ RpCurr.format(product.price) }}</p>
         <button
           type="button"
-          @click="addToCart(product)"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          @click="add(product)"
+          class="relative z-10 text-white ring- ring-gray-100 hover:ring-gray-300 hover:text-gray-300 font-medium rounded-xl text-sm justify-self-end p-1.5 text-center inline-flex items-center"
         >
-          <svg
-            class="w-3.5 h-3.5 mr-2"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 21"
-          >
-            <path
-              d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"
-            />
-          </svg>
+          <ShoppingCartIcon class="w-5 h-5 mx-auto"
+          :class="added ? 'add' : ''" />
         </button>
       </div>
     </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.add {
+  animation: add 1s ease-in-out backwards;
+  transform: translateY(0);
+}
+
+@keyframes add {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+</style>
