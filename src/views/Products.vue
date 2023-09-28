@@ -1,7 +1,7 @@
 <template>
   <ProductContainer @grid="isGrid = !isGrid">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-2xl font-bold tracking-tight">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-700 dark:text-white">
         Customers also purchased
       </h2>
 

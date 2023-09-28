@@ -21,7 +21,7 @@ onMounted(() => {
   <div
     class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
   >
-    <h2 class="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">Products</h2>
+    <h2 class="mb-8 text-gray-700 dark:text-white text-3xl font-bold tracking-tight sm:text-4xl">Products</h2>
     <Slider>
       <ProductCard class="flex-shrink-0 w-1/6" v-for="product, i in products" :key="i" :product="product" is-grid />
     </Slider>
@@ -29,7 +29,7 @@ onMounted(() => {
   <div
     class="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-18 lg:max-w-7xl lg:px-8"
   >
-    <h2 class="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">Blogs</h2>
+    <h2 class="mb-8 text-gray-700 dark:text-white text-3xl font-bold tracking-tight sm:text-4xl">Blogs</h2>
     <div class="flex overflow-x-auto space-x-8 no-scrollbar">
       <BlogCard v-for="(post, i) in posts" :key="i" :post="post" />
     </div>

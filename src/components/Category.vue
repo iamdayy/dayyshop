@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen text-gray-700 dark:text-white">
     <div
       class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-8 sm:px-6 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
     >
@@ -32,7 +32,7 @@
           :key="i"
           :src="image"
           alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-          class="rounded-lg bg-gray-100"
+          class="rounded-lg bg-gray-500 dark:bg-gray-100 shadow-lg"
         />
       </div>
     </div>

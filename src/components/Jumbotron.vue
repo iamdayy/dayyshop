@@ -6,9 +6,9 @@ defineProps({
 });
 </script>
 <template>
-  <div class="h-3/5 bg-bottom" :style="`background-image: url(${image})`">
+  <div class="bg-bottom h-4/5" :style="`background-image: url(${image})`">
     <div
-      :class="`absolute flex sm:flex-row flex-col h-full bg-gradient-to-b from-[#43baff57] from-60% to-60%`"
+      :class="`absolute flex sm:flex-row flex-col h-full bg-gradient-to-b from-[#ffffff6b] dark:from-[#43baff57] from-80% to-80%`"
     >
       <div class="px-4 mx-auto text-center py-12 pt-28 lg:py-36">
         <h1

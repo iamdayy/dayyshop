@@ -84,7 +84,7 @@ onMounted(() => {
 </script>
 <template>
   <section
-    class="md:flex md:flex-row-reverse md:justify-between p-6"
+    class="md:flex md:flex-row-reverse md:justify-between p-6 text-gray-700 dark:text-white bg-white dark:bg-gray-700"
     id="accordion-collapse"
     data-accordion="collapse"
   >

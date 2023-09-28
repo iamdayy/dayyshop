@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-gray-700 dark:text-white">
     <!-- Mobile filter dialog -->
     <TransitionRoot as="template" :show="mobileFiltersOpen">
       <Dialog
@@ -112,7 +112,7 @@
       <div
         class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24"
       >
-        <h1 class="text-4xl font-bold tracking-tight text-gray-100">
+        <h1 class="text-4xl font-bold tracking-tight">
           New Arrivals
         </h1>
 
@@ -120,11 +120,11 @@
           <Menu as="div" class="relative inline-block text-left">
             <div>
               <MenuButton
-                class="group inline-flex justify-center text-sm font-medium text-gray-300 hover:text-gray-100"
+                class="group inline-flex justify-center text-sm font-medium hover:text-gray-100"
               >
                 Sort
                 <ChevronDownIcon
-                  class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-100 group-hover:text-gray-300"
+                  class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 group-hover:text-gray-300"
                   aria-hidden="true"
                 />
               </MenuButton>
@@ -166,7 +166,7 @@
 
           <button
             type="button"
-            class="-m-2 ml-5 p-2 text-gray-100 hover:text-gray-300 sm:ml-7"
+            class="-m-2 ml-5 p-2 hover:text-gray-300 sm:ml-7"
           >
             <span class="sr-only">View grid</span>
             <ViewGridIcon
@@ -177,7 +177,7 @@
           </button>
           <button
             type="button"
-            class="-m-2 ml-4 p-2 text-gray-100 hover:text-gray-300 sm:ml-6 lg:hidden"
+            class="-m-2 ml-4 p-2 hover:text-gray-300 sm:ml-6 lg:hidden"
             @click="mobileFiltersOpen = true"
           >
             <span class="sr-only">Filters</span>
@@ -195,7 +195,7 @@
             <h3 class="sr-only">Categories</h3>
             <ul
               role="list"
-              class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-100"
+              class="space-y-4 border-b border-gray-700 dark:border-gray-200 pb-6 text-sm font-medium"
             >
               <li v-for="(category, i) in subCategories" :key="i">
                 <a :href="category.href">{{ category.title }}</a>
@@ -206,14 +206,14 @@
               as="div"
               v-for="section in filters"
               :key="section.id"
-              class="border-b border-gray-200 py-6"
+              class="border-b border-gray-700 dark:border-gray-200 py-6"
               v-slot="{ open }"
             >
               <h3 class="-my-3 flow-root">
                 <DisclosureButton
-                  class="flex w-full items-center justify-between py-3 text-sm text-gray-100 hover:text-gray-300"
+                  class="flex w-full items-center justify-between py-3 text-sm hover:text-gray-300"
                 >
-                  <span class="font-medium text-gray-100">{{
+                  <span class="font-medium">{{
                     section.name
                   }}</span>
                   <span class="ml-6 flex items-center">
@@ -239,7 +239,7 @@
                     />
                     <label
                       :for="`filter-${section.id}-${optionIdx}`"
-                      class="ml-3 text-sm text-gray-600"
+                      class="ml-3 text-sm"
                       >{{ option.label }}</label
                     >
                   </div>

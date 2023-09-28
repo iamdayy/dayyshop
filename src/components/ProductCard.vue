@@ -23,11 +23,11 @@ defineProps({
 });
 </script>
 <template>
-  <div :class="`group relative bg-slate-400 bg-opacity-20 backdrop-blur-sm border border-gray-100 rounded-2xl overflow-hidden ${!isGrid ? 'flex space-x-12' : ''}`">
+  <div :class="`group relative text-gray-700 dark:text-white bg-slate-600 dark:bg-slate-400 bg-opacity-20 backdrop-blur-sm border border-gray-100 rounded-2xl overflow-hidden ${!isGrid ? 'flex space-x-12' : ''}`">
     <div
       :class="`aspect-square aspect-w-1 ${
         isGrid ? 'w-full' : 'w-1/6'
-      } overflow-hidden bg-gray-200 group-hover:opacity-75 align-middle`"
+      } overflow-hidden bg-gray-500 dark:bg-gray-200 group-hover:opacity-75 align-middle`"
     >
       <img
         :src="product.imageSrc"
@@ -52,7 +52,7 @@ defineProps({
         <button
           type="button"
           @click="add(product)"
-          class="relative z-10 text-white ring- ring-gray-100 hover:ring-gray-300 hover:text-gray-300 font-medium rounded-xl text-sm justify-self-end p-1.5 text-center inline-flex items-center"
+          class="relative z-10 text-gray-700 dark:text-white ring- ring-gray-100 hover:ring-gray-300 hover:text-gray-300 font-medium rounded-xl text-sm justify-self-end p-1.5 text-center inline-flex items-center"
         >
           <ShoppingCartIcon class="w-5 h-5 mx-auto"
           :class="added ? 'add' : ''" />

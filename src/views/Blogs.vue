@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24 sm:py-32">
+  <div class="py-24 sm:py-32 text-gray-700 dark:text-white">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto lg:mx-0">
         <div class="flex w-full justify-between">
@@ -9,7 +9,7 @@
           <div>
             <button
               type="button"
-              class="-m-2 ml-5 p-2 text-gray-100 hover:text-gray-300 sm:ml-7"
+              class="-m-2 ml-5 p-2 hover:text-gray-300 sm:ml-7"
             >
               <span class="sr-only">View grid</span>
               <ViewGridIcon
@@ -21,11 +21,11 @@
             <Menu as="div" class="relative inline-block text-left">
               <div>
                 <MenuButton
-                  class="group inline-flex justify-center text-sm font-medium text-gray-300 hover:text-gray-100 ml-4"
+                  class="group inline-flex justify-center text-sm font-medium hover:text-gray-100 ml-4"
                 >
                   <FilterIcon class="h-5 w-5" aria-hidden="true"></FilterIcon>
                   <ChevronDownIcon
-                    class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-100 group-hover:text-gray-300"
+                    class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 group-hover:text-gray-300"
                     aria-hidden="true"
                   />
                 </MenuButton>

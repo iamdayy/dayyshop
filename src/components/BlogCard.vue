@@ -16,7 +16,7 @@ defineProps({
   <article
     :class="`flex flex-shrink-0 ${
       isGrid ? 'max-w-lg' : 'min-w-full'
-    } flex-col items-start justify-between border border-slate-300 rounded-lg p-4`"
+    } flex-col items-start justify-between text-gray-700 dark:text-white border border-slate-300 shadow-lg rounded-lg p-4`"
   >
     <div class="flex items-center gap-x-4 text-xs">
       <time :datetime="post.datetime" class="">{{ post.date }}</time>

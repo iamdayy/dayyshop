@@ -24,7 +24,7 @@ const routes = ref<Route[]>([
 </script>
 <template>
   <NavBar :routes="routes"></NavBar>
-  <main>
+  <main class="bg-white dark:bg-slate-700">
     <router-view></router-view>
   </main>
   <Footer />

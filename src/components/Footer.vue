@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <footer class="rounded-lg shadow m-4">
+  <footer class="bg-white dark:bg-slate-700">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
       <div class="sm:flex sm:items-center sm:justify-between">
         <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
@@ -10,7 +10,7 @@
             alt="Flowbite Logo"
           />
           <span
-            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            class="self-center text-2xl font-semibold whitespace-nowrap text-gray-600 dark:text-white"
             >Dayyshop</span
           >
         </a>
