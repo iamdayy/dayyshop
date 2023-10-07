@@ -93,7 +93,7 @@ defineProps({
 				<tr class="total">
 					<td></td>
 
-					<td>Total: {{ RpCurr.format(data?.total) }}</td>
+					<td>Total: {{ RpCurr.format(data?.total!) }}</td>
 				</tr>
 			</table>
 		</div>
