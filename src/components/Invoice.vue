@@ -1,5 +1,19 @@
 <script setup lang="ts">
-import '../assets/invoice.css'
+import { PropType } from 'vue';
+import '../assets/invoice.css';
+import { Order } from '../types';
+
+const RpCurr = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    })
+
+defineProps({
+	data: {
+		type: {} as PropType<Order>,
+		required: true,
+	}
+});
 </script>
 <template>
   <article class="overflow-hidden">
@@ -14,7 +28,7 @@ import '../assets/invoice.css'
 								</td>
 
 								<td>
-									Invoice #: 123<br />
+									Invoice #: {{ data?.id }}<br />
 									Created: January 1, 2023<br />
 									Due: February 1, 2023
 								</td>
@@ -28,15 +42,15 @@ import '../assets/invoice.css'
 						<table>
 							<tr>
 								<td>
-									Sparksuite, Inc.<br />
-									12345 Sunny Road<br />
-									Sunnyville, TX 12345
+									{{ data?.customer.address.street }}<br />
+									{{ data?.customer.address.village }}<br />
+									{{ data?.customer.address.district }}, {{ data?.customer.address.city }}, {{ data?.customer.address.province }} {{ data?.customer.address.postal }}
 								</td>
 
 								<td>
-									Acme Corp.<br />
-									John Doe<br />
-									john@example.com
+									{{ data?.customer.courier }}<br />
+									{{data?.customer.name.first}} {{data?.customer.name.last}}<br />
+									{{data?.customer.email}}
 								</td>
 							</tr>
 						</table>
@@ -82,7 +96,7 @@ import '../assets/invoice.css'
 				<tr class="total">
 					<td></td>
 
-					<td>Total: $385.00</td>
+					<td>Total: {{ RpCurr.format(data?.total) }}</td>
 				</tr>
 			</table>
 		</div>
