@@ -41,7 +41,33 @@ export interface Post {
   description: string;
   author: Author;
 }
+export interface Customer {
+  name: {
+    first: string;
+    last: string;
+  };
+  email: string;
+  address: {
+    province: string;
+    city: string;
+    district: string;
+    village: string;
+    postal: number;
+    street: string;
+  }
+  courier: string;
 
+}
+export interface Order {
+  id: number;
+  customer: Customer;
+  products: Cart[];
+  subtotal: number;
+  discount: number;
+  shipcost: number;
+  total: number;
+  status: boolean;
+}
 export interface Cart extends Product {
   quantity: number;
 }

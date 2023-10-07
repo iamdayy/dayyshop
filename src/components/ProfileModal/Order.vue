@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { initModals } from "flowbite";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import {
   AnnotationIcon,
   DocumentDownloadIcon,
@@ -10,6 +10,15 @@ import {
 import Invoice from "../Invoice.vue";
 import PrintJs from "prntr";
 import jsPdf from 'jspdf';
+import { Order } from '../../types/index';
+import useOrderStore from "../../stores/order";
+import { storeToRefs } from "pinia";
+
+const orderSelected = ref<Order | null>(null)
+
+const order = useOrderStore()
+
+const { orders } = storeToRefs(order);
 const printInvoice = () => {
   PrintJs({
     printable: "invoice",
@@ -228,7 +237,7 @@ onMounted(() => {
       </thead>
       <tbody class="">
         <tr
-          v-for="i in 20"
+          v-for="item, i in orders"
           :key="i"
           class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
@@ -250,21 +259,22 @@ onMounted(() => {
           >
             <img
               class="w-10 h-10 rounded-full"
-              src="../../assets/vue.svg"
+              :src="item.products[0].imageSrc"
               alt="Jese image"
             />
             <div class="pl-3">
-              <div class="text-base font-semibold">Neil Sims</div>
+              <div class="text-base font-semibold">{{ `${item.customer.name.first} ${item.customer.name.last}` }}</div>
               <div class="font-normal text-gray-500">
-                neil.sims@flowbite.com
+                {{ item.customer.email }}
               </div>
             </div>
           </th>
-          <td class="px-6 py-4 display">240.000</td>
+          <td class="px-6 py-4 display">{{ item.total }}</td>
           <td class="px-6 py-4 display">
             <div class="flex items-center">
               <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-              Delivered
+              <svg v-if="item.status" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M5 11v1h8v-7h-10v-1c0-.552.448-1 1-1h10c.552 0 1 .448 1 1v2h4.667c1.117 0 1.6.576 1.936 1.107.594.94 1.536 2.432 2.109 3.378.188.312.288.67.288 1.035v4.48c0 1.089-.743 2-2 2h-1c0 1.656-1.344 3-3 3s-3-1.344-3-3h-4c0 1.656-1.344 3-3 3s-3-1.344-3-3h-1c-.552 0-1-.448-1-1v-6h-2v-2h7v2h-3zm3 5.8c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm10 0c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm-3-2.8h-10v2h.765c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h5.53c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h1.765v-4.575l-1.711-2.929c-.179-.307-.508-.496-.863-.496h-4.426v6zm1-5v3h5l-1.427-2.496c-.178-.312-.509-.504-.868-.504h-2.705zm-16-3h8v2h-8v-2z"/></svg>
+              <svg v-else width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M5 11v1h8v-7h-10v-1c0-.552.448-1 1-1h10c.552 0 1 .448 1 1v2h4.667c1.117 0 1.6.576 1.936 1.107.594.94 1.536 2.432 2.109 3.378.188.312.288.67.288 1.035v4.48c0 1.089-.743 2-2 2h-1c0 1.656-1.344 3-3 3s-3-1.344-3-3h-4c0 1.656-1.344 3-3 3s-3-1.344-3-3h-1c-.552 0-1-.448-1-1v-6h-2v-2h7v2h-3zm3 5.8c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm10 0c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm-3-2.8h-10v2h.765c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h5.53c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h1.765v-4.575l-1.711-2.929c-.179-.307-.508-.496-.863-.496h-4.426v6zm1-5v3h5l-1.427-2.496c-.178-.312-.509-.504-.868-.504h-2.705zm-16-3h8v2h-8v-2z"/></svg>
             </div>
           </td>
           <td class="px-6 py-4">
@@ -274,6 +284,7 @@ onMounted(() => {
               type="button"
               data-modal-target="orderDetailModal"
               data-modal-show="orderDetailModal"
+              @click="orderSelected = item"
               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
             >
               <EyeIcon class="w-5 h-5" />

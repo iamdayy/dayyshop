@@ -5,7 +5,8 @@ import useCartStore from "../stores/cart";
 import { onMounted, ref } from "vue";
 import { initAccordions } from "flowbite";
 import axios from "../plugins/axios";
-
+import type { IMethodAddOrder } from "../types/methods";
+import useOrderStore from "../stores/order";
 const { carts, getSubTotal } = storeToRefs(useCartStore());
 const provinces = ref<any[]>([]);
 const cities = ref<any[]>([]);
@@ -15,6 +16,42 @@ const courires = ref<any[]>([]);
 const discount = ref<number>(Math.floor(Math.random() * 10) * 1000);
 const shipCost = ref<number>(Math.floor(Math.random() * 100) * 1000);
 const total = ref<number>(getSubTotal.value - discount.value + shipCost.value)
+
+const order = useOrderStore();
+
+const { add } = order;
+
+interface IMethodAddOrderWithDiscAndCost extends IMethodAddOrder {
+  discount: number;
+  shipcost: number;
+}
+
+const payload = ref<IMethodAddOrderWithDiscAndCost>({
+  customer: {
+    name: {
+      first: "",
+      last: "",
+    },
+    email: "",
+    courier: "",
+    address: {
+      province: "",
+      city: "",
+      district: "",
+      village: "",
+      street: "",
+      postal: 0,
+    },
+  },
+  discount: 0,
+  shipcost: 0,
+} as IMethodAddOrderWithDiscAndCost)
+const addOrder = () => {
+  payload.value.discount = discount.value;
+  payload.value.shipcost = shipCost.value;
+  payload.value.products = carts.value;
+  add(payload.value);
+}
 
 const RpCurr = new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -198,6 +235,7 @@ onMounted(() => {
                   <input
                     type="text"
                     name="first-name"
+                    v-model="payload.customer.name.first"
                     id="first-name"
                     autocomplete="given-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -215,6 +253,7 @@ onMounted(() => {
                   <input
                     type="text"
                     name="last-name"
+                    v-model="payload.customer.name.last"
                     id="last-name"
                     autocomplete="family-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -231,6 +270,7 @@ onMounted(() => {
                     id="email"
                     name="email"
                     type="email"
+                    v-model="payload.customer.email"
                     autocomplete="email"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -247,6 +287,7 @@ onMounted(() => {
                   <select
                     id="province"
                     name="province"
+                    v-model="payload.customer.address.province"
                     autocomplete="province-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     @change="loadCities"
@@ -272,6 +313,7 @@ onMounted(() => {
                   <select
                     id="city"
                     name="city"
+                    v-model="payload.customer.address.city"
                     autocomplete="city-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     @change="loadDistricts"
@@ -297,6 +339,7 @@ onMounted(() => {
                   <select
                     id="district"
                     name="district"
+                    v-model="payload.customer.address.district"
                     autocomplete="district-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     @change="loadVillages"
@@ -322,6 +365,7 @@ onMounted(() => {
                   <select
                     id="village"
                     name="village"
+                    v-model="payload.customer.address.village"
                     autocomplete="village-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   >
@@ -363,6 +407,7 @@ onMounted(() => {
                   <select
                     id="courir"
                     name="courir"
+                    v-model="payload.customer.courier"
                     autocomplete="courir-name"
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm bg-gray-50 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   >
@@ -387,6 +432,7 @@ onMounted(() => {
                   <textarea
                     name="street-address"
                     id="street-address"
+                    v-model="payload.customer.address.street"
                     row="5"
                     placeholder="Write your address..."
                     class="block w-full rounded-md border-0 py-1.5 shadow-sm dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-700 placeholder:dark:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
@@ -409,6 +455,7 @@ onMounted(() => {
         </button>
         <button
           type="submit"
+          @click="addOrder"
           class="rounded-md w-full md:w-1/2 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Confirm
