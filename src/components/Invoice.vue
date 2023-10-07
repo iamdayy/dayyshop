@@ -9,10 +9,7 @@ const RpCurr = new Intl.NumberFormat("id-ID", {
     })
 
 defineProps({
-	data: {
-		type: {} as PropType<Order>,
-		required: true,
-	}
+	data: {} as PropType<Order>
 });
 </script>
 <template>

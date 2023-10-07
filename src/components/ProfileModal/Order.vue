@@ -14,7 +14,7 @@ import { Order } from '../../types/index';
 import useOrderStore from "../../stores/order";
 import { storeToRefs } from "pinia";
 
-const orderSelected = ref<Order>({} as Order)
+const orderSelected = ref<Order | null>(null)
 
 const order = useOrderStore()
 
@@ -335,7 +335,7 @@ onMounted(() => {
           </div>
           <!-- Modal body -->
           <div class="p-6 space-y-6 overflow-y-scroll h-96">
-            <Invoice :data="orderSelected" id="invoice" />
+            <Invoice v-if="orderSelected" :data="orderSelected" id="invoice" />
           </div>
           <!-- Modal footer -->
           <div
