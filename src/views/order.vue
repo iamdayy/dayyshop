@@ -7,6 +7,7 @@ import { initAccordions } from "flowbite";
 import axios from "../plugins/axios";
 import type { IMethodAddOrder } from "../types/methods";
 import useOrderStore from "../stores/order";
+import { useRouter } from "vue-router";
 const { carts, getSubTotal } = storeToRefs(useCartStore());
 const provinces = ref<any[]>([]);
 const cities = ref<any[]>([]);
@@ -26,6 +27,7 @@ interface IMethodAddOrderWithDiscAndCost extends IMethodAddOrder {
   shipcost: number;
 }
 
+const router = useRouter()
 const payload = ref<IMethodAddOrderWithDiscAndCost>({
   customer: {
     name: {
@@ -51,6 +53,9 @@ const addOrder = () => {
   payload.value.shipcost = shipCost.value;
   payload.value.products = carts.value;
   add(payload.value);
+  setTimeout(() => {
+    router.push({ name: "Home" })
+  }, 3000)
 }
 
 const RpCurr = new Intl.NumberFormat("id-ID", {

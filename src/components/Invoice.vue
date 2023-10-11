@@ -55,45 +55,39 @@ defineProps({
 				</tr>
 
 				<tr class="heading">
-					<td>Payment Method</td>
-
-					<td>Check #</td>
-				</tr>
-
-				<tr class="details">
-					<td>Check</td>
-
-					<td>1000</td>
-				</tr>
-
-				<tr class="heading">
 					<td>Item</td>
 
 					<td>Price</td>
+
+					<td>Qty</td>
+
+					<td>Subtotal</td>
 				</tr>
 
-				<tr class="item">
-					<td>Website design</td>
+				<tr class="item" v-for="item, i in data?.products" :key="i">
+					<td>{{ item.name }}</td>
 
-					<td>$300.00</td>
-				</tr>
+					<td>{{ RpCurr.format(item.price) }}</td>
 
-				<tr class="item">
-					<td>Hosting (3 months)</td>
+					<td>{{ item.quantity }}</td>
 
-					<td>$75.00</td>
-				</tr>
-
-				<tr class="item last">
-					<td>Domain name (1 year)</td>
-
-					<td>$10.00</td>
+					<td>{{ RpCurr.format(item.quantity * item.price) }}</td>
 				</tr>
 
 				<tr class="total">
-					<td></td>
+					<td>Ship Cost :</td>
 
-					<td>Total: {{ RpCurr.format(data?.total!) }}</td>
+					<td colspan="3">{{ RpCurr.format(data?.shipcost!) }}</td>
+				</tr>
+				<tr class="total">
+					<td>Discount :</td>
+
+					<td colspan="3">{{ RpCurr.format(data?.discount!) }}</td>
+				</tr>
+				<tr class="total">
+					<td>Total :</td>
+
+					<td colspan="3">{{ RpCurr.format(data?.total!) }}</td>
 				</tr>
 			</table>
 		</div>
